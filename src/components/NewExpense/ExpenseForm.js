@@ -1,21 +1,54 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 
+/*const initialData={
+  enteredTitle:'',
+    enteredAmount:'',
+    enteredDate:'',
+} // you can also create an object and can use inside inside a single state rather than mantaining multiple states. 
+    
+*/
+
 const ExpenseForm = () => {
-  const [enteredTitle, setEnteredTitle] = useState("");
+  /*const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
+  //Multiple State Management
+  */
+
+  const [userInput, setUserInput] = useState({
+    //Here you can also use InitialDate(object) if the element inside of object is much more.
+    enteredTitle: "",
+    enteredAmount: "",
+    enteredDate: "",
+  });
 
   const titleChangeHandler = (event) => {
-    setEnteredTitle(event.target.value);
+    //setEnteredTitle(event.target.value); // This method is used for single state Management
+    setUserInput((prevState) => {
+      return {
+        ...prevState,
+        enteredTitle: event.target.value,
+        //prevState provide you current values of object which was not possible only by setUserInput().
+      };
+    });
   };
 
   const amountChangeHandler = (event) => {
-    setEnteredAmount(event.target.value);
+    setUserInput((prevState) => {
+      return {
+        ...prevState,
+        enteredAmount: event.target.value,
+      };
+    });
   };
-
   const dateChangeHandler = (event) => {
-    setEnteredDate(event.target.value);
+    setUserInput((prevState) => {
+      return {
+        ...prevState,
+        enteredDate: event.target.value,
+      };
+    });
   };
 
   return (
